@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>MBTI LEARN</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      background-color: #e7e7e7;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    #menu {
+      width: 250px;
+      background-color: #cacaca;
+      padding: 40px 20px;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    .menu-block {
+      margin-bottom: 20px;
+    }
+    .menu-block:hover .small {
+      display: block;
+	}
+     .small {
+      display: none;
+      margin-left: 10px;
+      background-color: #e0e0e0;
+      padding: 10px;
+      box-shadow: 2px 2px 5px #b0b0b0;
+    }
+    .small div {
+      font-size: 14px;
+      margin: 2px 0;
+    }
+    .small div:hover {
+      color: #0e6d62;
+      cursor: pointer;
+    }
+    .menu-big {
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 5px;
+    }
+    .main-area {
+      flex: 1;
+      height: 100vh;
+      padding-left: 50px;
+      display: flex;
+      flex-direction: column;
+    }
+    .current {
+      position: absolute;
+      top: 30px;
+      left: 300px;
+      font-size: 14px;
+      font-weight: bold;
+      background-color: #f7f7f7;
+      padding: 10px 20px;
+      border-radius: 30px;
+      color: black;
+      border: 1px solid #cccccc;
+    }
+    .login-button {
+      position: absolute;
+      cursor: pointer;
+      top: 30px;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 20px;
+      right: 30px;
+      background-color: #0e6d62;
+      color: white;
+      font-size: 13px;
+    }
+    .login-button:hover {
+      background-color: #09413a;
+    }
+    .form-wrapper {
+      margin-top: 80px;
+      margin-right: auto;
+      margin-left: auto;
+      background-color: #0e6d62;
+      width: 65vw;
+      padding: 20px;
+      max-width: 800px;
+      min-width: 400px;
+      border-radius: 20px;
+    }
+    .form-titlebar {
+      background-color: white;
+      color: #333;
+      border-radius: 30px;
+      font-size: 15px;
+      margin-bottom: 0px;
+      padding: 12px 20px;
+      text-align: left;
+      font-weight: bold;
+    }
+    .form-bigbox {
+      margin-top: 10px;
+      border-radius: 50px;
+      padding: 30px;
+      background-color: white;
+      
+    }
+    .form-group {
+      display: flex;
+      border-bottom: 1px solid darkgrey;
+      padding-bottom: 10px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      width: 140px;
+      font-size: 14px;
+      color: black;
+    }
+    .form-group input, .form-group textarea {
+      flex: 1;
+      padding: 5px;
+      border: 1px solid #0e6d62;
+      border-radius: 3px;
+      font-size: 14px;
+    }
+    textarea {
+      resize: none;
+      height: 150px;
+    }
+    .form-buttons {
+      display: flex;
+      margin-top: 30px;
+      justify-content: space-between;
+      align-items: center;
+  
+    }
+    .left-button {
+      display: flex;
+      align-items: center;
+      gap: 55px; 
+    }
+     .button:hover {
+      background-color: #09413a;
+    }
+    .star {
+      font-size: 14px;
+      color: black;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border: 2px solid #0e6d62;
+    }
+    .starcheck {
+      display: flex;
+      align-items: center;
+      gap: 5px; 
+    }
+    .right-buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .button {
+      background-color: #0e6d62;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      padding: 10px 17px;
+      font-size: 14px;
+      color: white;
+    }
+  
+  </style>
+</head>
+
+<body>
+  <div class="current">글쓰기</div>
+  <button class="login-button">로그인</button>
+
+    <div id="menu">
+    <div class="menu-block">
+      <div class="menu-big">홈</div>
+    </div>
+
+    <div class="menu-block">
+      <div class="menu-big">MBTI 자유 게시판</div>
+      <div class="small">
+        <div>ENTP (0)</div><div>ENTJ (0)</div><div>ENFP (0)</div><div>ENFJ (0)</div>
+        <div>ESTP (0)</div><div>ESTJ (0)</div><div>ESFP (0)</div><div>ESFJ (0)</div>
+        <div>INTP (0)</div><div>INTJ (0)</div><div>INFP (0)</div><div>INFJ (0)</div>
+        <div>ISTP (0)</div><div>ISTJ (0)</div><div>ISFP (0)</div><div>ISFJ (0)</div>
+      </div>
+    </div>
+
+    <div class="menu-block">
+      <div class="menu-big">MBTI 궁합이 궁금해?</div>
+      <div class="small">
+        <div>ENTP (0)</div><div>ENTJ (0)</div><div>ENFP (0)</div><div>ENFJ (0)</div>
+        <div>ESTP (0)</div><div>ESTJ (0)</div><div>ESFP (0)</div><div>ESFJ (0)</div>
+        <div>INTP (0)</div><div>INTJ (0)</div><div>INFP (0)</div><div>INFJ (0)</div>
+        <div>ISTP (0)</div><div>ISTJ (0)</div><div>ISFP (0)</div><div>ISFJ (0)</div>
+      </div>
+    </div>
+
+    <div class="menu-block">
+      <div class="menu-big">MBTI 연예인</div>
+      <div class="small">
+        <div>ENTP (0)</div><div>ENTJ (0)</div><div>ENFP (0)</div><div>ENFJ (0)</div>
+        <div>ESTP (0)</div><div>ESTJ (0)</div><div>ESFP (0)</div><div>ESFJ (0)</div>
+        <div>INTP (0)</div><div>INTJ (0)</div><div>INFP (0)</div><div>INFJ (0)</div>
+        <div>ISTP (0)</div><div>ISTJ (0)</div><div>ISFP (0)</div><div>ISFJ (0)</div>
+      </div>
+    </div>
+
+    <div class="menu-block">
+      <div class="menu-big">MBTI 질문 게시판</div>
+      <div class="small">
+        <div>ENTP (0)</div><div>ENTJ (0)</div><div>ENFP (0)</div><div>ENFJ (0)</div>
+        <div>ESTP (0)</div><div>ESTJ (0)</div><div>ESFP (0)</div><div>ESFJ (0)</div>
+        <div>INTP (0)</div><div>INTJ (0)</div><div>INFP (0)</div><div>INFJ (0)</div>
+        <div>ISTP (0)</div><div>ISTJ (0)</div><div>ISFP (0)</div><div>ISFJ (0)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-area">
+    <div class="form-wrapper">
+      <div class="form-titlebar">MBTI 자유 게시판 - ISTP</div>
+      <div class="form-bigbox">
+      <form action="NewFile.jsp" method="post">
+        <div class="form-group">
+          <label for="mbti">MBTI :</label>
+          <input type="text" id="mbti" />
+        </div>
+        <div class="form-group">
+          <label for="title">제목 :</label>
+          <input type="text" id="title" />
+        </div>
+        <div class="form-group">
+          <label for="email">이메일주소 :</label>
+          <input type="email" id="email" />
+        </div>
+        <div class="form-group">
+          <label for="content">글 내용 :</label>
+          <textarea id="content"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="color">원하는 메모 색상 (hex) :</label>
+          <input type="text" id="color" />
+        </div>
+        <div class="form-group">
+          <label for="password">비밀번호 :</label>
+          <input type="password" id="password" />
+        </div>
+        <div class="form-group">
+          <label for="memono">메모번호 :</label>
+          <input type="text" id="memono" />
+        </div>
+
+        <div class="form-buttons">
+          <div class="left-button">
+            <button class="button">목록으로</button>
+            <div class="starcheck">
+              <label class="star" for="star">중요여부 :</label>
+              <input type="checkbox" id="star" />
+            </div>
+          </div>
+          <div class="right-buttons">
+            <button class="button" onclick="openFile()">사진삽입</button>
+            <button class="button" onclick="submitForm()">등록하기</button>
+            <input type="file" id="file-upload" accept="image/*" style="display: none;">
+          </div>
+        </div>
+		</form>
+      </div>
+    </div>
+  </div>
+
+<script>
+function openFile() {
+  document.getElementById('file-upload').click();
+}
+
+function submitForm() {
+  var mbti = document.getElementById('mbti').value;
+  var title = document.getElementById('title').value;
+  var email = document.getElementById('email').value;
+  var content = document.getElementById('content').value;
+  var color = document.getElementById('color').value;
+  var password = document.getElementById('password').value;
+  var memono = document.getElementById('memono').value;
+  var star = document.getElementById('star').checked ? "O" : "X";
+  var fileUpload = document.getElementById('file-upload');
+  var fileName = fileUpload.files.length > 0 ? fileUpload.files[0].name : "첨부된 파일 없음";
+  var today = new Date();
+  var dateStr = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2,'0') + '-' + today.getDate().toString().padStart(2,'0');
+  var message = "MBTI : "+mbti+"\n"+
+                "메모 제목 : " + title + "\n" +
+                "이메일 주소 : " + email + "\n" +
+                "메모 내용 : " + content + "\n" +
+                "메모 배경색 : " + color + "\n" +
+                "메모 번호 : " + memono + "\n" +
+                "중요 여부 : " + star + "\n" +
+                "첨부 그림 파일명 : " + fileName + "\n" +
+                "작성일 : " + dateStr;
+  alert(message);
+}
+</script>
+
+</body>
+</html>

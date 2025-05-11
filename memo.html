@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>MBTI LEARN</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+    body {
+      flex-direction: row;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+    }
+	* {
+      box-sizing: border-box;
+    }
+    #menu {
+      width: 250px;
+      background-color: #cacaca;
+      height: 100%;
+      padding: 40px 20px;
+    }
+    .menu-block {
+      position: relative;
+      margin-bottom: 20px;
+    }
+    .menu-big {
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 5px;
+    }
+    .small {
+      display: none;
+      margin-left: 10px;
+      box-shadow: 2px 2px 5px #b0b0b0;
+      background-color: #e0e0e0;
+      padding: 10px;
+    }
+    .menu-block:hover .small {
+      display: block;
+    }
+    .small div {
+      font-size: 14px;
+      margin: 2px 0;
+    }
+    .small div:hover {
+      color: #0e6d62;
+      cursor: pointer;
+    }
+    .main-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background-color: #e7e7e7;
+      padding: 30px;
+      gap: 20px;
+      height: 100%;
+      overflow-y: auto;
+      position: relative;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .current {
+      background-color: #f7f7f7;
+      padding: 10px 20px;
+      border-radius: 30px;
+      color: black;
+      min-width: 250px;
+      max-width: 100%;
+      font-size: 14px;
+      font-weight: bold;
+      border: 1px solid #cccccc;
+    }
+    .buttons {
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .write-button{
+      background-color: #0e6d62;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 13px;
+      cursor: pointer;
+      padding: 10px 20px;
+    }
+    .write-button:hover{
+      background-color: #09413a;
+    }
+    .login-button{
+      background-color: #0e6d62;
+      padding: 10px 20px;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    .login-button:hover{
+      background-color: #09413a;
+    }
+    .owner-button {
+      background-color: #0e6d62;
+      color: white;
+      font-size: 13px;
+      cursor: pointer;
+      border: none;
+      border-radius: 30px;
+      padding: 10px 20px;
+    }
+   	.owner-button:hover {
+      background-color: #09413a;
+    }
+    .board {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+      padding-bottom: 80px;
+    }
+    .card {
+  	  background-color: white;
+      border-radius: 15px;
+      padding: 0;
+      border: 1px solid #cccccc;
+	}
+    .card-header {
+     display: flex;
+     border-top-left-radius: 15px;
+     border-top-right-radius: 15px;
+     padding: 10px 20px;
+     font-size: 14px;
+     color: black;
+     justify-content: space-between;   
+     align-items: center;
+     background-color: #0e6d62;
+	}
+	.card-title {
+ 	 display: flex;
+ 	 color: white;
+ 	 align-items: center;
+ 	 gap: 10px;
+	}
+	.card-info {	
+      font-size: 13px;
+      color: #f9f9f9;
+      text-align: right;
+      white-space: nowrap;
+ 	  flex-shrink: 0;
+	}
+    .card-content {
+      background-color: white;
+  	  padding: 20px;
+      font-size: 14px;
+      color: black;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .card-content p {
+      font-size: 14px;
+      margin: 0;
+      flex: 1;
+    }
+    .card-actions {
+      margin-top: 10px;
+      font-size: 12px;
+      text-align: right;
+      margin-right: 20px;
+    }
+    .card-actions a {
+      text-decoration: none;
+      color: black;
+      margin: 0 3px;
+      position: relative;
+      top: -2px;
+    }
+    .card-image {
+      border-radius: 5px;
+      margin-left: 15px;
+      width: 100px;
+      height: 80px;
+      object-fit: cover;
+    }
+    .card-actions a:hover {
+      color: #0e6d62;
+      text-decoration: underline;
+    }
+    .page {
+      text-align: center;
+      margin: 10px 0;
+      font-size: 11px;
+      font-weight: bold;
+      color: black;
+    }
+    .board-footer {
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      left: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .search {
+      display: flex;
+      align-items: center;
+      background-color: #f7f7f7;
+      padding: 10px 20px;
+      border-radius: 30px;
+      flex: 1;
+      min-width: 200px;
+      border: 1px solid #cccccc;
+    }
+    .search-dotbogi {
+      width: 23px;
+      height: 20px;
+      margin-right: 10px;
+    }
+    .search-input {
+      flex: 1;
+      border: none;
+      color: grey;
+      background-color: transparent;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .search-input:focus {
+      outline: none;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <div id="menu">
+    <div class="menu-block"><div class="menu-big">홈</div></div>
+    <div class="menu-block">
+      <div class="menu-big">MBTI 자유 게시판</div>
+      <div class="small">
+        <div>ENTP (0)</div><div>ENTJ (0)</div><div>ENFP (0)</div><div>ENFJ (0)</div>
+        <div>ESTP (0)</div><div>ESTJ (0)</div><div>ESFP (0)</div><div>ESFJ (0)</div>
+        <div>INTP (0)</div><div>INTJ (0)</div><div>INFP (0)</div><div>INFJ (0)</div>
+        <div>ISTP (0)</div><div>ISTJ (0)</div><div>ISFP (0)</div><div>ISFJ (0)</div>
+      </div>
+    </div>
+    <div class="menu-block">
+      <div class="menu-big">MBTI 궁합이 궁금해?</div>
+      <div class="small">
+        <div>ENTP (0)</div><div>ENTJ (0)</div><div>ENFP (0)</div><div>ENFJ (0)</div>
+        <div>ESTP (0)</div><div>ESTJ (0)</div><div>ESFP (0)</div><div>ESFJ (0)</div>
+        <div>INTP (0)</div><div>INTJ (0)</div><div>INFP (0)</div><div>INFJ (0)</div>
+        <div>ISTP (0)</div><div>ISTJ (0)</div><div>ISFP (0)</div><div>ISFJ (0)</div>
+      </div>
+    </div>
+    <div class="menu-block">
+      <div class="menu-big">MBTI 연예인</div>
+      <div class="small">
+        <div>ENTP (0)</div><div>ENTJ (0)</div><div>ENFP (0)</div><div>ENFJ (0)</div>
+        <div>ESTP (0)</div><div>ESTJ (0)</div><div>ESFP (0)</div><div>ESFJ (0)</div>
+        <div>INTP (0)</div><div>INTJ (0)</div><div>INFP (0)</div><div>INFJ (0)</div>
+        <div>ISTP (0)</div><div>ISTJ (0)</div><div>ISFP (0)</div><div>ISFJ (0)</div>
+      </div>
+    </div>
+    <div class="menu-block">
+      <div class="menu-big">MBTI 질문 게시판</div>
+      <div class="small">
+        <div>ENTP (0)</div><div>ENTJ (0)</div><div>ENFP (0)</div><div>ENFJ (0)</div>
+        <div>ESTP (0)</div><div>ESTJ (0)</div><div>ESFP (0)</div><div>ESFJ (0)</div>
+        <div>INTP (0)</div><div>INTJ (0)</div><div>INFP (0)</div><div>INFJ (0)</div>
+        <div>ISTP (0)</div><div>ISTJ (0)</div><div>ISFP (0)</div><div>ISFJ (0)</div>
+      </div>
+    </div>
+  </div>
+  <div class="main-area">
+    <div class="top-bar">
+      <div class="current">MBTI 자유 게시판 - ISTP (2)</div>
+      <div class="buttons">
+        <button class="write-button">글쓰기</button>
+        <button class="login-button">로그인</button>
+      </div>
+    </div>
+    <div class="board">
+      <div class="card">
+        <div class="card-header">
+  <div class="card-title">글 제목 (최근 순) | ISTP (doorian0615@gmail.com)</div>
+  <div class="card-info">2 | 2025-03-29 | 13:21 | 조회수 : 15</div>
+</div>
+        <div class="card-content">
+          <p>글 내용 내용...</p>
+          <img src="images/1.png" class="card-image" />
+        </div>
+        <div class="card-actions">
+          <a href="#"> 수정</a> |
+          <a href="#">삭제</a> |
+          <a href="#">답글 </a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+  <div class="card-title">글 제목 (최근 순) | ISTP (rian_lee@naver.com)</div>
+  <div class="card-info">1 | 2025-03-29 | 9:21 | 조회수 : 32</div>
+</div>
+        <div class="card-content">
+          <p>글 내용 내용...</p>
+          <img src="images/2.png" class="card-image" />
+        </div>
+        <div class="card-actions">
+          <a href="#"> 수정</a> |
+          <a href="#">삭제</a> |
+          <a href="#">답글 </a>
+        </div>
+      </div>
+      <div class="page">« 1 »</div>
+    </div>
+    <div class="board-footer">
+      <div class="search">
+        <img src="images/dotbogi.png" class="search-dotbogi" />
+        <input
+          type="text"
+          id="search-input"
+          placeholder="검색어를 입력하세요."
+          class="search-input"
+        />
+      </div>
+      <button class="owner-button">게시판 관리</button>
+    </div>
+  </div>
+</body>
+</html>
